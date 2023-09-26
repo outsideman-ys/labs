@@ -1,10 +1,10 @@
 ﻿#include <iostream>
 #include <cstring>
-#include "Strings.h"
+#include "D:\Labs C++\labs\Lab1\headers\Strings.h"
 
 int main()
 {
-    const char* str1 = "Hello world";
+    const char* str1 = "Hello pipupo";
     Strings object(strlen(str1), str1);
     object.PrintStr();
     std::cout << std::endl;

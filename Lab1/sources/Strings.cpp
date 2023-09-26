@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "Strings.h"
+#include "D:\Labs C++\labs\Lab1\headers\Strings.h"
 #include <cstring>
 #include <iostream>
 
