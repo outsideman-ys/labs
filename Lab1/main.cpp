@@ -4,7 +4,7 @@
 
 int main()
 {
-    const char* str1 = "Hello world";
+    const char* str1 = "Hello начальник лох";
     Strings object(strlen(str1), str1);
     object.PrintStr();
     std::cout << std::endl;
