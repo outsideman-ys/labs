@@ -12,7 +12,10 @@ void Strings::PrintStr() {
     std::cout << timeOfCreate->tm_hour << ":";
     if (timeOfCreate->tm_min < 10)
         std::cout << "0";
-    std::cout << timeOfCreate->tm_min << std::endl;
+    std::cout << timeOfCreate->tm_min << ":";
+    if (timeOfCreate->tm_sec < 10)
+        std::cout << "0";
+    std::cout << timeOfCreate->tm_sec << std::endl;
 }
 
 void Strings::RegTime() {

@@ -22,7 +22,7 @@ public:
     void PrintStr();
     void UnionStr(int, const char*);
     void RegTime();
-    };
+};
 
 
 #endif
