@@ -4,7 +4,7 @@
 
 int main()
 {
-    //      CONSTRUCTOR WITH PARAMETERS     //
+    //     CONSTRUCTOR WITH PARAMETERS     //
     std::cout << "CONSTRUCTOR WITH PARAMETERS" << std::endl << std:: endl;
     const char* str1 = "Hello world";
     Strings* object = new Strings(strlen(str1), str1);
