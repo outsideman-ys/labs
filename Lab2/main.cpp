@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <cstring>
-#include "Strings.h"
+#include "D:\Labs C++\labs\Lab2\headers\Strings.h"
 
 int main()
 {

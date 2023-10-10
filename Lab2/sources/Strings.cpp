@@ -1,12 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "Strings.h"
+#include "D:\Labs C++\labs\Lab2\headers\Strings.h"
 #include <cstring>
 #include <iostream>
 
 void Strings::PrintStr() {
-    for (int i = 0; i < currSize; i++)
-        std::cout << charArray[i];
-    std::cout << std::endl;
+    std::cout << charArray << std::endl;
+    std::cout << "Current size: " << currSize << std::endl;
     if (timeOfCreate->tm_hour < 10)
         std::cout << "0";
     std::cout << timeOfCreate->tm_hour << ":";
@@ -26,7 +25,8 @@ void Strings::RegTime() {
 
 void Strings::ChangeStr(int currSize, const char* charArray) {
     delete[] this->charArray;
-    this->charArray = new char[currSize];
+    this->charArray = new char[currSize + 1];
+    this->charArray[currSize] = '\0';
 
     for (int i = 0; i < currSize; i++)
         this->charArray[i] = charArray[i];
@@ -34,7 +34,7 @@ void Strings::ChangeStr(int currSize, const char* charArray) {
 }
 
 void Strings::UnionStr(int currSize, const char* addStr) {
-    char* temp = new char[this->currSize+currSize];
+    char* temp = new char[this->currSize+currSize + 1];
     for (int i = 0; i < this->currSize; i++) {
         temp[i] = this->charArray[i];
     }
@@ -43,8 +43,9 @@ void Strings::UnionStr(int currSize, const char* addStr) {
     }
     delete[] this->charArray;
     this->currSize += currSize;
-    this->charArray = new char[this->currSize];
+    this->charArray = new char[this->currSize + 1];
     strcpy(this->charArray, temp);
+    this->charArray[this->currSize] = '\0';
     delete[] temp;
 }
 
@@ -72,16 +73,17 @@ Strings::Strings() {
     this->charArray = new char[3];
     this->charArray[0] = 'H';
     this->charArray[1] = 'i';
-    this->charArray[2] = 0;
+    this->charArray[2] = '\0';
     RegTime();
 }
 
 Strings::Strings(const Strings &object) {
     this->currSize = object.currSize;
-    this->charArray = new char[this->currSize];
+    this->charArray = new char[this->currSize + 1];
     for (int i = 0; i < this->currSize; i++) {
         this->charArray[i] = object.charArray[i];
     }
+    this->charArray[this->currSize] = '\0';
     RegTime();
 }
 
@@ -113,10 +115,11 @@ Strings& Strings::operator=(const Strings& str) {
         /*ChangeStr(str.currSize, str.charArray);*/
         currSize = str.currSize;
         delete[] charArray;
-        charArray = new char[str.currSize];
+        charArray = new char[str.currSize + 1];
         for (int i = 0; i < currSize; i++) {
             charArray[i] = str.charArray[i];
         }
+        charArray[currSize] = '\0';
     }
     return *this;
 }
@@ -138,7 +141,7 @@ Strings Strings::operator + (const Strings& object) {
     for (int i = this->currSize, j = 0; i < this->currSize + object.currSize; i++, j++) {
         temp[i] = object.charArray[j];
     }
-    //temp[this->currSize + object.currSize] = 0;
+
     delete[] charArray;
     this->currSize += object.currSize;
     charArray = new char[this->currSize];
