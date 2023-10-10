@@ -7,6 +7,7 @@ void Strings::PrintStr() {
     for (int i = 0; i < currSize; i++)
         std::cout << charArray[i];
     std::cout << std::endl;
+    std::cout << "Current size: " << currSize << std::endl;
     if (timeOfCreate->tm_hour < 10)
         std::cout << "0";
     std::cout << timeOfCreate->tm_hour << ":";

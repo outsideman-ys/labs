@@ -11,7 +11,6 @@ private:
     char* charArray;
     int currSize;
     tm* timeOfCreate;
-
 public:
     Strings();
     Strings(int, const char*);
