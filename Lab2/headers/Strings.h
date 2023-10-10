@@ -11,7 +11,6 @@ private:
     char* charArray;
     int currSize;
     tm* timeOfCreate;
-    int code;
 
 public:
     Strings();
@@ -30,6 +29,8 @@ public:
     Strings& operator=(const Strings&);
     operator const char*() const;
     int getSize();
+    Strings operator + (const Strings& string);
+    friend Strings operator - (Strings& object1, const Strings& object2);
     };
 
 

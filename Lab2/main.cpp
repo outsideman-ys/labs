@@ -4,7 +4,7 @@
 
 int main()
 {
-    //     CONSTRUCTOR WITH PARAMETERS     //
+    //      CONSTRUCTOR WITH PARAMETERS     //
     std::cout << "CONSTRUCTOR WITH PARAMETERS" << std::endl << std:: endl;
     const char* str1 = "Hello world";
     Strings* object = new Strings(strlen(str1), str1);
@@ -59,6 +59,23 @@ int main()
     object->PrintStr();
     std::cout << std::endl << std::endl;
 
+    //          MINUS               //
+    const char* str3 = "Hello, world boba";
+    Strings* object3 = new Strings(strlen(str3), str3);
+    const char* str4 = "world";
+    Strings* object4 = new Strings(strlen(str4), str4);
+    std::cout << "- overloading:" << std::endl;
+    *object3 - *object4;
+    object3->PrintStr();
+    std::cout << std::endl;
+
+    //          PLUS                //
+    std::cout << "+ overloading" << std::endl;
+    *object3 + *object4;
+    object3->PrintStr();
+    std::cout << std::endl << std::endl;
+
+
     //          TYPE CAST           //
     std::cout << "TYPE CAST" << std::endl << std::endl;
     const char* bob = *object;
@@ -71,5 +88,7 @@ int main()
     delete object;
     delete object1;
     delete object2;
+    delete object3;
+    delete object4;
     return 0;
 }
