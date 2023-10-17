@@ -5,7 +5,7 @@
 
 void Strings::PrintStr() {
     std::cout << charArray << std::endl;
-    std::cout << "Current size: " << currSize << std::endl;
+    std::cout << "Current size: " << currSize - 1 << std::endl;
     if (timeOfCreate->tm_hour < 10)
         std::cout << "0";
     std::cout << timeOfCreate->tm_hour << ":";
@@ -115,10 +115,11 @@ Strings& Strings::operator=(const Strings& str) {
         /*ChangeStr(str.currSize, str.charArray);*/
         currSize = str.currSize;
         delete[] charArray;
-        charArray = new char[str.currSize + 1];
-        for (int i = 0; i < currSize; i++) {
+        charArray = new char[currSize + 1];
+        /*for (int i = 0; i < currSize; i++) {
             charArray[i] = str.charArray[i];
-        }
+        }*/
+        strncpy(charArray, str.charArray, currSize);
         charArray[currSize] = '\0';
     }
     return *this;
@@ -134,9 +135,10 @@ int Strings::getSize() {
 
 Strings Strings::operator + (const Strings& object) {
     char* temp = new char[this->currSize + object.currSize + 1];
-    for (int i = 0; i < this->currSize-1; i++) {
+    /*for (int i = 0; i < this->currSize-1; i++) { 
         temp[i] = this->charArray[i];
-    }
+    }*/
+    strncpy(temp, this->charArray, currSize - 1);
     temp[currSize-1] = ' ';
     for (int i = this->currSize, j = 0; i < this->currSize + object.currSize; i++, j++) {
         temp[i] = object.charArray[j];
