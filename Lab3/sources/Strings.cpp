@@ -135,22 +135,20 @@ int Strings::getSize() {
 }
 
 Strings Strings::operator + (const Strings& object) {
-    char* temp = new char[this->currSize + object.currSize + 1];
-    /*for (int i = 0; i < this->currSize-1; i++) {
-        temp[i] = this->charArray[i];
-    }*/
-    strncpy(temp, this->charArray, currSize - 1);
-    temp[currSize - 1] = ' ';
-    for (int i = this->currSize, j = 0; i < this->currSize + object.currSize; i++, j++) {
+    Strings result(*this);
+    char* temp = new char[result.currSize + object.currSize + 1];
+    strncpy(temp, result.charArray, currSize - 1);
+    temp[result.currSize - 1] = ' ';
+    for (int i = result.currSize, j = 0; i < result.currSize + object.currSize; i++, j++) {
         temp[i] = object.charArray[j];
     }
 
-    delete[] charArray;
-    this->currSize += object.currSize;
-    charArray = new char[this->currSize];
-    strcpy(this->charArray, temp);
+    delete[] result.charArray;
+    result.currSize += object.currSize;
+    result.charArray = new char[result.currSize];
+    strcpy(result.charArray, temp);
     delete[] temp;
-    return object;
+    return result;
 }
 
 
@@ -175,7 +173,7 @@ Strings operator - (const Strings& object1, const Strings& object2) {
         Strings result(newCurrSize, temp);
         return result;
     }
-} 
+}
 
 std::ofstream& operator<< (std::ofstream& ofs, Strings object) {
         ofs << object.charArray << std::endl;
@@ -199,6 +197,7 @@ std::fstream& operator<< (std::fstream& ofsBin, Strings object) {
 }
 
 std::fstream& operator>> (std::fstream& ifsBin, Strings object) {
+    object.charArray = NULL;
     ifsBin.read((char*)&object, sizeof(Strings));
     object.PrintStr();
     return ifsBin;

@@ -66,14 +66,16 @@ int main()
     const char* str4 = "world";
     Strings* object4 = new Strings(strlen(str4), str4);
     std::cout << "- overloading:" << std::endl;
-    *object3 - *object4;
-    object3->PrintStr();
+
+    *object2 = *object3 - *object4;
+    std::cout << std::endl;
     std::cout << std::endl;
 
     //          PLUS                //
     std::cout << "+ overloading" << std::endl;
-    *object3 + *object4;
-    object3->PrintStr();
+    std::cout << std::endl;
+    *object2 = *object3 + *object4;
+    object2->PrintStr();
     std::cout << std::endl << std::endl;
 
 
@@ -83,8 +85,10 @@ int main()
     for (int i = 0; i < object->getSize(); i++) {
         std::cout << bob[i];
     }
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 
+
+    //          OUT STRING FILE STREAM          //
     std::ofstream ofs("text.txt", std::ios::out);					
     if (!ofs) {
         std::cerr << "Error writing to text file." << std::endl;
@@ -93,6 +97,7 @@ int main()
     ofs << *object3;
     ofs.close();
 
+    //          OUT BINARY FILE STREAM          //
     std::fstream ofsBinary("text.bin", std::ios::binary | std::ios::out);
     if (!ofsBinary) {
         std::cerr << "Error writing to binary file." << std::endl;
@@ -101,12 +106,15 @@ int main()
     ofsBinary << *object3;
     ofsBinary.close();
 
-    std::fstream ifsBinary("text.bin", std::ios::binary | std::ios::in);
+    //          IN BINARY FILE STREAM          //
+    std::fstream ifsBinary("text.bin", std::ios::in | std::ios::binary);
     if (!ifsBinary) {
         std::cerr << "Error reading to binary file." << std::endl;
         exit(1);
     }
-    ifsBinary >> *object3;
+    std::cout << "Reading form binary file: " << std::endl;
+    Strings* object5 = new Strings(*object3);
+    ifsBinary >> *object5;
     ifsBinary.close();
 
     std::cout << std::endl << std::endl;
