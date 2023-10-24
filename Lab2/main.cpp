@@ -66,16 +66,17 @@ int main()
     const char* str4 = "world";
     Strings* object4 = new Strings(strlen(str4), str4);
     std::cout << "- overloading:" << std::endl;
-    *object3 - *object4;
-    object3->PrintStr();
+
+    *object2 = *object3 - *object4;
+    std::cout << std::endl;
     std::cout << std::endl;
 
     //          PLUS                //
     std::cout << "+ overloading" << std::endl;
-    *object3 + *object4;
-    object3->PrintStr();
+    std::cout << std::endl;
+    *object2 = *object3 + *object4;
+    object2->PrintStr();
     std::cout << std::endl << std::endl;
-
 
     //          TYPE CAST           //
     std::cout << "TYPE CAST" << std::endl << std::endl;

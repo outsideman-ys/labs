@@ -30,7 +30,7 @@ public:
     operator const char* () const;
     int getSize();
     Strings operator + (const Strings& string);
-    friend Strings operator - (Strings& object1, const Strings& object2);
+    friend Strings operator - (const Strings& object1, const Strings& object2);
 };
 
 
