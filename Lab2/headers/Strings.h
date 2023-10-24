@@ -33,5 +33,4 @@ public:
     friend Strings operator - (Strings& object1, const Strings& object2);
     };
 
-
 #endif

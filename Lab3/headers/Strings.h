@@ -1,6 +1,8 @@
 #pragma once
 
 #include <ctime>
+#include <fstream> 
+
 
 #ifndef STRINGS_H
 #define STRINGS_H
@@ -11,6 +13,7 @@ private:
     char* charArray;
     int currSize;
     tm* timeOfCreate;
+
 public:
     Strings();
     Strings(int, const char*);
@@ -21,6 +24,11 @@ public:
     void PrintStr();
     void UnionStr(int, const char*);
     void RegTime();
+
+    Strings operator + (const Strings& string);
+    friend Strings operator - (Strings& object1, const Strings& object2);
+
+    friend std::ofstream& operator<< (std::ofstream& os, Strings object);
 };
 
 
