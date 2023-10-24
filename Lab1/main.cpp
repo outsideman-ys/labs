@@ -1,4 +1,4 @@
-﻿#include <iostream>
+﻿﻿#include <iostream>
 #include <cstring>
 #include "D:\Labs C++\labs\Lab1\headers\Strings.h"
 
