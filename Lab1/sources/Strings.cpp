@@ -34,7 +34,7 @@ void Strings::ChangeStr(int currSize, const char* charArray) {
 }
 
 void Strings::UnionStr(int currSize, const char* addStr) {
-    char* temp = new char[this->currSize+currSize];
+    char* temp = new char[this->currSize + currSize];
     for (int i = 0; i < this->currSize; i++) {
         temp[i] = this->charArray[i];
     }
@@ -74,7 +74,7 @@ Strings::Strings() {
     RegTime();
 }
 
-Strings::Strings(const Strings &object) {
+Strings::Strings(const Strings& object) {
     this->currSize = object.currSize;
     this->charArray = new char[this->currSize];
     for (int i = 0; i < this->currSize; i++) {
