@@ -1,7 +1,6 @@
 #pragma once
 
 #include <ctime>
-#include <fstream>
 
 #ifndef STRINGS_H
 #define STRINGS_H
@@ -31,10 +30,7 @@ public:
     operator const char* () const;
     int getSize();
     Strings operator + (const Strings& string);
-    friend Strings operator - (const Strings& object1, const Strings& object2);
-    friend std::ofstream& operator<< (std::ofstream& ofs, Strings object);
-    friend std::fstream& operator<< (std::fstream& ofsBin, Strings object);
-    friend std::fstream& operator>> (std::fstream& ifsBin, Strings object);
+    friend Strings operator - (Strings& object1, const Strings& object2);
 };
 
 

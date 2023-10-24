@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "D:\Labs C++\labs\Lab3\headers\Strings.h"
 #include <cstring>
 #include <iostream>
 #include <fstream>
+#include "C:\Users\ysmir\source\repos\ochko\headers\Strings.h"
 
 void Strings::PrintStr() {
     std::cout << charArray << std::endl;
@@ -89,7 +89,7 @@ Strings::Strings(const Strings& object) {
 }
 
 //post
-Strings Strings::operator++(int) { 
+Strings Strings::operator++(int) {
     Strings temp(*this);
     this->charArray[currSize - 1]++;
     return temp;
@@ -154,7 +154,7 @@ Strings Strings::operator + (const Strings& object) {
 }
 
 
-Strings operator - (const Strings& object1, const Strings& object2) {
+Strings operator - (Strings& object1, const Strings& object2) {
     char* temp = new char[object1.currSize + 1];
     strcpy(temp, object1.charArray);
     temp[object1.currSize] = '\0';
@@ -163,47 +163,24 @@ Strings operator - (const Strings& object1, const Strings& object2) {
     subTemp[object2.currSize] = '\0';
     char* pointer = strstr(temp, subTemp);
     if (pointer == NULL) {
-        return object1;
+        return object2;
     }
     else {
         int indStart = pointer - temp;
         int indEnd = pointer - temp + object2.currSize;
+        char* temp = new char[object1.currSize];
+        strcpy(temp, object1.charArray);
         for (int i = indStart, j = indEnd; j < object1.currSize; i++, j++) {
             temp[i] = temp[j];
         }
-        int newCurrSize = object1.currSize - object2.currSize;
-        Strings result(newCurrSize, temp);
-        return result;
+        delete[] object1.charArray;
+        object1.currSize -= object2.currSize;
+        object1.charArray = new char[object1.currSize];
+        strncpy(object1.charArray, temp, object1.currSize);
+        delete[] temp;
     }
-} 
-
-std::ofstream& operator<< (std::ofstream& ofs, Strings object) {
-        ofs << object.charArray << std::endl;
-        ofs << "Size: " << object.currSize << std::endl;
-        ofs << "Time of create: ";
-        if (object.timeOfCreate->tm_hour < 10)
-            ofs << "0";
-        ofs << object.timeOfCreate->tm_hour << ":";
-        if (object.timeOfCreate->tm_min < 10)
-            ofs << "0";
-        ofs << object.timeOfCreate->tm_min << ":";
-        if (object.timeOfCreate->tm_sec < 10)
-            ofs << "0";
-        ofs << object.timeOfCreate->tm_sec << std::endl;
-    return ofs;
+    return object2;
 }
-
-std::fstream& operator<< (std::fstream& ofsBin, Strings object) {
-    ofsBin.write((char*)&object, sizeof(Strings));
-    return ofsBin;
-}
-
-std::fstream& operator>> (std::fstream& ifsBin, Strings object) {
-    ifsBin.read((char*)&object, sizeof(Strings));
-    object.PrintStr();
-    return ifsBin;
-}
-
 
 
 Strings::~Strings() {
