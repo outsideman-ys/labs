@@ -1,6 +1,8 @@
 #pragma once
 
 #include <ctime>
+#include <fstream> 
+
 
 #ifndef STRINGS_H
 #define STRINGS_H
@@ -22,15 +24,12 @@ public:
     void PrintStr();
     void UnionStr(int, const char*);
     void RegTime();
-    Strings operator++(int);
-    Strings operator--(int);
-    Strings& operator++();
-    Strings& operator--();
-    Strings& operator=(const Strings&);
-    operator const char*() const;
-    int getSize();
+
     Strings operator + (const Strings& string);
     friend Strings operator - (Strings& object1, const Strings& object2);
-    };
+
+    friend std::ofstream& operator<< (std::ofstream& os, Strings object);
+};
+
 
 #endif

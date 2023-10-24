@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "D:\Labs C++\labs\Lab2\headers\Strings.h"
 #include <cstring>
 #include <iostream>
+#include <fstream>
+#include "C:\Users\ysmir\source\repos\ochko\headers\Strings.h"
 
 void Strings::PrintStr() {
     std::cout << charArray << std::endl;
@@ -27,13 +28,14 @@ void Strings::ChangeStr(int currSize, const char* charArray) {
     delete[] this->charArray;
     this->charArray = new char[currSize + 1];
     this->charArray[currSize] = '\0';
+
     for (int i = 0; i < currSize; i++)
         this->charArray[i] = charArray[i];
     this->currSize = currSize;
 }
 
 void Strings::UnionStr(int currSize, const char* addStr) {
-    char* temp = new char[this->currSize+currSize + 1];
+    char* temp = new char[this->currSize + currSize + 1];
     for (int i = 0; i < this->currSize; i++) {
         temp[i] = this->charArray[i];
     }
@@ -59,10 +61,10 @@ int Strings::FindStr(const char* subCharArray) {
 }
 
 Strings::Strings(int currSize, const char* charArray) {
-    this->charArray = new char[currSize+1];
+    this->charArray = new char[currSize + 1];
     for (int i = 0; i < currSize; i++)
         this->charArray[i] = charArray[i];
-    this->currSize = currSize+1;
+    this->currSize = currSize + 1;
     this->charArray[currSize] = 0;
     RegTime();
 }
@@ -76,7 +78,7 @@ Strings::Strings() {
     RegTime();
 }
 
-Strings::Strings(const Strings &object) {
+Strings::Strings(const Strings& object) {
     this->currSize = object.currSize;
     this->charArray = new char[this->currSize + 1];
     for (int i = 0; i < this->currSize; i++) {
@@ -89,13 +91,13 @@ Strings::Strings(const Strings &object) {
 //post
 Strings Strings::operator++(int) {
     Strings temp(*this);
-    this->charArray[currSize-1]++;
+    this->charArray[currSize - 1]++;
     return temp;
 }
 //post
 Strings Strings::operator--(int) {
     Strings temp(*this);
-    this->charArray[currSize-1]--;
+    this->charArray[currSize - 1]--;
     return temp;
 }
 //pre
@@ -105,7 +107,7 @@ Strings& Strings::operator++() {
 }
 //pre
 Strings& Strings::operator--() {
-    this->charArray[currSize-1]--;
+    this->charArray[currSize - 1]--;
     return *this;
 }
 
@@ -124,7 +126,7 @@ Strings& Strings::operator=(const Strings& str) {
     return *this;
 }
 
-Strings::operator const char*() const {
+Strings::operator const char* () const {
     return charArray;
 }
 
@@ -134,11 +136,11 @@ int Strings::getSize() {
 
 Strings Strings::operator + (const Strings& object) {
     char* temp = new char[this->currSize + object.currSize + 1];
-    /*for (int i = 0; i < this->currSize-1; i++) { 
+    /*for (int i = 0; i < this->currSize-1; i++) {
         temp[i] = this->charArray[i];
     }*/
     strncpy(temp, this->charArray, currSize - 1);
-    temp[currSize-1] = ' ';
+    temp[currSize - 1] = ' ';
     for (int i = this->currSize, j = 0; i < this->currSize + object.currSize; i++, j++) {
         temp[i] = object.charArray[j];
     }
@@ -147,28 +149,10 @@ Strings Strings::operator + (const Strings& object) {
     this->currSize += object.currSize;
     charArray = new char[this->currSize];
     strcpy(this->charArray, temp);
-    this->charArray = new char[this->currSize];
-    for (int i = 0; i < this->currSize; i++) {
-        this->charArray[i] = object.charArray[i];
-    }
-    RegTime();
-}
-
-Strings Strings::operator + (const Strings& object) {
-    char* temp = new char[this->currSize + object.currSize];
-    for (int i = 0; i < this->currSize; i++) {
-        temp[i] = this->charArray[i]; 
-    }
-    for (int i = this->currSize, j = 0; i < this->currSize + object.currSize; i++, j++) {
-        temp[i] = object.charArray[j];
-    }
-    delete[] this->charArray;
-    this->currSize += object.currSize;
-    this->charArray = new char[this->currSize];
-    strcpy(this->charArray, temp); 
     delete[] temp;
     return object;
 }
+
 
 Strings operator - (Strings& object1, const Strings& object2) {
     char* temp = new char[object1.currSize + 1];
@@ -197,6 +181,7 @@ Strings operator - (Strings& object1, const Strings& object2) {
     }
     return object2;
 }
+
 
 Strings::~Strings() {
     delete[] charArray;
