@@ -1,12 +1,12 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <cstring>
-#include "D:\Labs C++\labs\Lab3\headers\Strings.h" 
+#include "headers\Strings.h" 
 
 int main()
 {
     //      CONSTRUCTOR WITH PARAMETERS     //
-    std::cout << "CONSTRUCTOR WITH PARAMETERS" << std::endl << std::endl; 
+    std::cout << "CONSTRUCTOR WITH PARAMETERS" << std::endl << std::endl;
     const char* str1 = "Hello world";
     Strings* object = new Strings(strlen(str1), str1);
     object->PrintStr();

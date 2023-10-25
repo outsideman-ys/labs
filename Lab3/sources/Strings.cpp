@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "D:\Labs C++\labs\Lab3\headers\Strings.h"
 #include <cstring>
 #include <iostream>
 #include <fstream>
+#include "C:\Users\ysmir\source\repos\ochko\headers\Strings.h"
 
 void Strings::PrintStr() {
     std::cout << charArray << std::endl;
@@ -88,8 +88,7 @@ Strings::Strings(const Strings& object) {
     RegTime();
 }
 
-//post
-Strings Strings::operator++(int) { 
+Strings Strings::operator++(int) {
     Strings temp(*this);
     this->charArray[currSize - 1]++;
     return temp;
@@ -152,6 +151,7 @@ Strings Strings::operator + (const Strings& object) {
 }
 
 
+
 Strings operator - (const Strings& object1, const Strings& object2) {
     char* temp = new char[object1.currSize + 1];
     strcpy(temp, object1.charArray);
@@ -202,8 +202,6 @@ std::fstream& operator>> (std::fstream& ifsBin, Strings object) {
     object.PrintStr();
     return ifsBin;
 }
-
-
 
 Strings::~Strings() {
     delete[] charArray;

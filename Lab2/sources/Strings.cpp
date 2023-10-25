@@ -2,7 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
-#include "D:\Labs C++\labs\Lab2\headers\Strings.h" 
+#include "C:\Users\ysmir\source\repos\ochko\headers\Strings.h"
 
 void Strings::PrintStr() {
     std::cout << charArray << std::endl;
