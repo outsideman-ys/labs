@@ -135,26 +135,25 @@ int Strings::getSize() {
 }
 
 Strings Strings::operator + (const Strings& object) {
-    char* temp = new char[this->currSize + object.currSize + 1];
-    /*for (int i = 0; i < this->currSize-1; i++) {
-        temp[i] = this->charArray[i];
-    }*/
-    strncpy(temp, this->charArray, currSize - 1);
-    temp[currSize - 1] = ' ';
-    for (int i = this->currSize, j = 0; i < this->currSize + object.currSize; i++, j++) {
+
+    Strings result(*this); 
+    char* temp = new char[result.currSize + object.currSize + 1];
+    strncpy(temp, result.charArray, currSize - 1);
+    temp[result.currSize - 1] = ' ';
+    for (int i = result.currSize, j = 0; i < result.currSize + object.currSize; i++, j++) {
         temp[i] = object.charArray[j];
     }
 
-    delete[] charArray;
-    this->currSize += object.currSize;
-    charArray = new char[this->currSize];
-    strcpy(this->charArray, temp);
+    delete[] result.charArray;
+    result.currSize += object.currSize;
+    result.charArray = new char[result.currSize];
+    strcpy(result.charArray, temp);
     delete[] temp;
-    return object;
+    return result;
 }
 
 
-Strings operator - (Strings& object1, const Strings& object2) {
+Strings operator - (const Strings& object1, const Strings& object2) {
     char* temp = new char[object1.currSize + 1];
     strcpy(temp, object1.charArray);
     temp[object1.currSize] = '\0';
@@ -163,23 +162,18 @@ Strings operator - (Strings& object1, const Strings& object2) {
     subTemp[object2.currSize] = '\0';
     char* pointer = strstr(temp, subTemp);
     if (pointer == NULL) {
-        return object2;
+        return object1;
     }
     else {
         int indStart = pointer - temp;
         int indEnd = pointer - temp + object2.currSize;
-        char* temp = new char[object1.currSize];
-        strcpy(temp, object1.charArray);
         for (int i = indStart, j = indEnd; j < object1.currSize; i++, j++) {
             temp[i] = temp[j];
         }
-        delete[] object1.charArray;
-        object1.currSize -= object2.currSize;
-        object1.charArray = new char[object1.currSize];
-        strncpy(object1.charArray, temp, object1.currSize);
-        delete[] temp;
+        int newCurrSize = object1.currSize - object2.currSize;
+        Strings result(newCurrSize, temp);
+        return result;
     }
-    return object2;
 }
 
 
