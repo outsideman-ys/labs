@@ -112,13 +112,9 @@ Strings& Strings::operator--() {
 
 Strings& Strings::operator=(const Strings& str) {
     if (&str != this) {
-        /*ChangeStr(str.currSize, str.charArray);*/
         currSize = str.currSize;
         delete[] charArray;
         charArray = new char[currSize + 1];
-        /*for (int i = 0; i < currSize; i++) {
-            charArray[i] = str.charArray[i];
-        }*/
         strncpy(charArray, str.charArray, currSize);
         charArray[currSize] = '\0';
     }
@@ -192,14 +188,28 @@ std::ofstream& operator<< (std::ofstream& ofs, Strings object) {
 }
 
 std::fstream& operator<< (std::fstream& ofsBin, Strings object) {
-    ofsBin.write((char*)&object, sizeof(Strings));
+    ofsBin.write((char*)&object.currSize, sizeof(object.currSize));
+    for (int i = 0; i < object.currSize; i++) {
+        ofsBin.write((char*)&object.charArray[i], sizeof(object.charArray[i]));
+    }
+    ofsBin.write((char*)&object.timeOfCreate, sizeof(tm*));
     return ofsBin;
 }
 
-std::fstream& operator>> (std::fstream& ifsBin, Strings object) {
-    object.charArray = NULL;
-    ifsBin.read((char*)&object, sizeof(Strings));
-    object.PrintStr();
+std::fstream& operator>> (std::fstream& ifsBin, Strings& object) {
+    if (object.charArray != nullptr) {
+        delete[] object.charArray;
+    }
+    int size;
+    ifsBin.read((char*)&size, sizeof(int));
+    object.currSize = size;
+    char* str = new char[size + 1];
+    ifsBin.read(str, object.currSize+1);
+    object.charArray = new char[object.currSize];
+    for (int i = 0; i <= strlen(str); i++) {
+        object.charArray[i] = str[i];
+    }
+    delete[] str;
     return ifsBin;
 }
 

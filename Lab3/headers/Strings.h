@@ -34,7 +34,7 @@ public:
     friend Strings operator - (const Strings& object1, const Strings& object2);
     friend std::ofstream& operator<< (std::ofstream& ofs, Strings object);
     friend std::fstream& operator<< (std::fstream& ofsBin, Strings object);
-    friend std::fstream& operator>> (std::fstream& ifsBin, Strings object);
+    friend std::fstream& operator>> (std::fstream& ifsBin, Strings& object);
 };
 
 
