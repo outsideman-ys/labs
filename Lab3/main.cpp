@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <cstring>
-#include "C:\Users\ysmir\source\repos\ochko\headers\Strings.h" 
+#include "D:\Labs C++\labs\Lab3\headers\Strings.h" 
 
 int main()
 {
