@@ -2,7 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
-#include "C:\Users\ysmir\source\repos\ochko\headers\Strings.h"
+#include "D:\Labs C++\labs\Lab3\headers\Strings.h"
 
 void Strings::PrintStr() {
     std::cout << charArray << std::endl;
@@ -207,7 +207,7 @@ std::fstream& operator>> (std::fstream& ifsBin, Strings& object) {
     ifsBin.read(str, object.currSize+1);
     object.charArray = new char[object.currSize];
     for (int i = 0; i <= strlen(str); i++) {
-        object.charArray[i] = str[i];
+        object.charArray[i] = str[i]; 
     }
     delete[] str;
     return ifsBin;
