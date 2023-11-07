@@ -1,5 +1,6 @@
 #include "D:\Labs C++\labs\Lab5\headers\List.h"
 
+
 bool List::isEmpty() {
     return head == nullptr;
 }
@@ -75,4 +76,13 @@ Strings* List::PopById(int id) {
         Push(temp.Pop());
     }
     return obj;
+}
+
+List::~List() {
+    Node* temp;
+    while (head) {
+        temp = head;
+        head = head->next;
+        delete temp;
+    }
 }
