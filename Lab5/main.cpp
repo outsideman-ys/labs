@@ -1,10 +1,11 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <cstring>
-#include "D:\Labs C++\labs\Lab5\headers\Strings.h" 
-#include "D:\Labs C++\labs\Lab5\headers\AnotherChildString.h" 
-#include "D:\Labs C++\labs\Lab5\headers\ChildString.h" 
-#include "D:\Labs C++\labs\Lab5\headers\List.h" 
+
+#include "C:\Users\ysmir\source\repos\ConsoleApplication1\headers\Strings.h" 
+#include "C:\Users\ysmir\source\repos\ConsoleApplication1\headers\AnotherChildString.h" 
+#include "C:\Users\ysmir\source\repos\ConsoleApplication1\headers\ChildString.h" 
+#include "C:\Users\ysmir\source\repos\ConsoleApplication1\headers\List.h"
 
 int main()
 {
