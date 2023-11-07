@@ -1,4 +1,4 @@
-#include "D:\Labs C++\labs\Lab5\headers\AnotherChildString.h"
+#include "D:\Labs C++\labs\Lab6\headers\AnotherChildString.h"
 #include <iostream>
 
 void AnotherChildString::PrintStr() {

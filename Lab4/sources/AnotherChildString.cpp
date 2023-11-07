@@ -1,4 +1,4 @@
-#include "C:/Users/ysmir/source/repos/ochko/headers/AnotherChildString.h"
+#include "D:\Labs C++\labs\Lab4\headers\AnotherChildString.h"
 #include <iostream>
 
 void AnotherChildString::PrintStr() {

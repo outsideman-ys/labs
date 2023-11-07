@@ -1,5 +1,5 @@
 #pragma once
-#include "D:\Labs C++\labs\Lab4\headers\Strings.h"
+#include "D:\Labs C++\labs\Lab6\headers\Strings.h" 
 
 class ChildString : public Strings
 {

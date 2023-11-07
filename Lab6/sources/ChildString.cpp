@@ -1,24 +1,24 @@
-#include "D:\Labs C++\labs\Lab4\headers\ChildString.h" 
+#include "D:\Labs C++\labs\Lab6\headers\ChildString.h"
 #include <iostream>
 
 void ChildString::PrintStr() {
-    std::cout << charArray << std::endl;
-    std::cout << "Current size: " << currSize - 1 << std::endl;
-    std::cout << "First word is " << std::endl;
+    //std::cout << charArray << std::endl;
+    //std::cout << "Current size: " << currSize - 1 << std::endl;
+    //std::cout << "First word is " << std::endl;
+    //if (timeOfCreate->tm_hour < 10)
+    //    std::cout << "0";
+    //std::cout << timeOfCreate->tm_hour << ":";
+    //if (timeOfCreate->tm_min < 10)
+    //    std::cout << "0";
+    //std::cout << timeOfCreate->tm_min << ":";
+    //if (timeOfCreate->tm_sec < 10) 
+    //    std::cout << "0";
+    //std::cout << timeOfCreate->tm_sec << std::endl;
+    Strings::PrintStr();
     for (int i = 0; i < firstWordSize; i++) {
         std::cout << firstWord[i];
     }
     std::cout << std::endl;
-    if (timeOfCreate->tm_hour < 10)
-        std::cout << "0";
-    std::cout << timeOfCreate->tm_hour << ":";
-    if (timeOfCreate->tm_min < 10)
-        std::cout << "0";
-    std::cout << timeOfCreate->tm_min << ":";
-    if (timeOfCreate->tm_sec < 10) {
-        std::cout << "0";
-    }
-    std::cout << timeOfCreate->tm_sec << std::endl;
 }
 
 void ChildString::DeleteSubstring(const char* subString) {
