@@ -1,4 +1,4 @@
-#include "D:\Labs C++\labs\Lab5\headers\List.h"
+#include "D:\Labs C++\labs\Lab6\headers\List.h"
 
 bool List::isEmpty() {
     return head == nullptr;
@@ -50,6 +50,8 @@ Strings* List::Find(const char* str) {
 }
 
 void List::PushById(Strings* object, int id) {
+    if (id >= globalId) throw("out_of_bounds");
+
     List temp;
     for (int i = globalId - 1; i >= id; i--) {
         temp.Push(head->object);

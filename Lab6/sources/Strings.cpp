@@ -2,7 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
-#include "D:\Labs C++\labs\Lab4\\headers\Strings.h"
+#include "D:\Labs C++\labs\Lab6\headers\Strings.h" 
 
 void Strings::PrintStr() {
     std::cout << charArray << std::endl;
@@ -62,6 +62,7 @@ int Strings::FindStr(const char* subCharArray) {
 
 Strings::Strings(int currSize, const char* charArray) {
     this->charArray = new char[currSize + 1];
+    if (currSize > strlen(charArray)) throw("memory_overflow_error");
     for (int i = 0; i < currSize; i++)
         this->charArray[i] = charArray[i];
     this->currSize = currSize + 1;
@@ -127,6 +128,10 @@ Strings::operator const char* () const {
 
 int Strings::getSize() {
     return currSize;
+}
+
+const char* Strings::getCharArray() {
+    return charArray;
 }
 
 Strings Strings::operator + (const Strings& object) {

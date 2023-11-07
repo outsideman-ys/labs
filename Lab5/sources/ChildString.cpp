@@ -1,4 +1,4 @@
-#include "C:/Users/ysmir/source/repos/ConsoleApplication1/headers/ChildString.h"
+#include "D:\Labs C++\labs\Lab5\headers\ChildString.h"
 #include <iostream>
 
 void ChildString::PrintStr() {

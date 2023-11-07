@@ -1,9 +1,10 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <cstring>
-#include "D:\Labs C++\labs\Lab4\headers\Strings.h" 
-#include "D:\Labs C++\labs\Lab4\headers\ChildString.h" 
-#include "D:\Labs C++\labs\Lab4\headers\AnotherChildString.h" 
+#include "D:\Labs C++\labs\Lab6\headers\Strings.h" 
+#include "D:\Labs C++\labs\Lab6\headers\AnotherChildString.h" 
+#include "D:\Labs C++\labs\Lab6\headers\ChildString.h" 
+#include "D:\Labs C++\labs\Lab6\headers\List.h" 
 
 int main()
 {
@@ -79,7 +80,6 @@ int main()
     object2->PrintStr();
     std::cout << std::endl << std::endl;*/
 
-
     //          TYPE CAST           //
     /*std::cout << "TYPE CAST" << std::endl << std::endl; 
     const char* bob = *object;
@@ -87,9 +87,6 @@ int main()
         std::cout << bob[i];
     }
     std::cout << std::endl << std::endl;*/
-
-
-    
 
     //          OUT STRING FILE STREAM          //
     //std::ofstream ofs("text.txt", std::ios::out);					
@@ -123,25 +120,92 @@ int main()
     //object5->PrintStr();
     //ifsBinary.close();
 
-    //std::cout << std::endl << std::endl;
-
     //CHILD STRING//
-    std::cout << "FIRST CHILD" << std::endl;
+    //std::cout << "FIRST CHILD" << std::endl;
     const char* str3 = "Boba opa lala";
+    Strings* opp;
     ChildString child = ChildString(strlen(str3), str3);
     child.DeleteSubstring("opa");
-    child.PrintStr();
-
+    opp = &child;
+    //opp->PrintStr();
     std::cout << std::endl;
  
     //ANOTHER CHILD STRING//
-    std::cout << "SECOND CHILD" << std::endl;
+    //std::cout << "SECOND CHILD" << std::endl;
     const char* str4 = "Opa opa Amerika Europa";
+    Strings* bob;
     AnotherChildString anotherChild = AnotherChildString(strlen(str4), str4);
     anotherChild.CalculateSpace();
-    anotherChild.PrintStr();
+    bob = &anotherChild;
+    //bob->PrintStr();
+    std::cout << std::endl;
     
+
+    List l;
+    //std::cout << l.isEmpty() << std::endl;
+    l.Push(object);
+    l.Push(bob);
+    l.Push(opp);
+    std::cout << "List" << std::endl;
+    //l.Print();
+    std::cout << std::endl;
+    //Strings* temp = l.Pop();
+    //std::cout << "Pop" << std::endl;
+    //temp->PrintStr();
+    //std::cout << std::endl;
+    //std::cout << std::endl;
+    //std::cout << std::endl;
+    //std::cout << "List" << std::endl;
+    //l.Print();
+    //std::cout << std::endl;
+    //std::cout << std::endl;
+    //std::cout << std::endl;
+    //std::cout << "Find" << std::endl;
+    //Strings* temp1 = l.Find("Hello world");
+    //if (temp1 != nullptr) {
+    //    temp1->PrintStr();
+    //}
+    const char* str5 = "Boba";
+    Strings* newBob = new Strings(strlen(str5), str5);
+    l.PushById(newBob, 0);
+    l.Print();
+
+    std::cout << "Pop by id" << std::endl << std::endl;
+    Strings* nBob = l.PopById(1);
+    l.Print();
+
+    try {
+        const char* strOpa = "allmiight Bob";
+        Strings* superBob = new Strings(strlen(strOpa) + 5, strOpa);
+    }
+    catch (const char* p) {
+        std::cerr << "Error - " << p << std::endl;
+        //return -1;
+    }
+
+    try {
+        std::ofstream ofs("\\INVALID\\FILE\\NAME", std::ios::out);
+        if (!ofs) {
+            throw("file_open_error");
+        }
+        ofs << *object;
+        ofs.close();
+    }
+    catch (const char* p) {
+        std::cerr << "Error - " << p << std::endl;
+        //return -1;
+    }
+
+    try {
+        l.PushById(newBob, 10);
+    }
+    catch (const char* p) {
+        std::cerr << "Error - " << p << std::endl;
+        return -1;
+    }
+
     delete object;
+    delete newBob;
     //delete object1;
     //delete object2;
     //delete object3;
