@@ -1,6 +1,6 @@
 #pragma once
 
-#include"headers/Strings.h"
+#include "Strings.h"
 #include "Node.h"
 #include <iostream>
 
@@ -13,6 +13,7 @@ private:
     int globalId;
 public:
     List() : head(nullptr), globalId(0) {}
+    ~List();
     bool isEmpty();
     void Push(Strings* object);
     Strings* Pop();
