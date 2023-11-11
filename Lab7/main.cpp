@@ -13,6 +13,9 @@ int main()
     s.push(&numb3);
     s.push(&numb4);
     s.print();
+    s.pop();
+    s.print();
+
 
     Stack<char> s1;
     char chr1 = 'a';
@@ -23,6 +26,8 @@ int main()
     s1.push(&chr2);
     s1.push(&chr3);
     s1.push(&chr4);
+    s1.print();
+    char* chr5 = s1.pop();
     s1.print();
     
     return 0;

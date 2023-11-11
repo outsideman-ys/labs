@@ -16,7 +16,7 @@ public:
 
 	void push(T* object) {
 		if (isEmpty()) {
-			stack = new T * [capacity];
+			stack = new T*[capacity];
 			stack[pointer] = object;
 			return;
 		}
@@ -41,6 +41,7 @@ public:
 		T** temp = new T * [capacity * capacityMultiplier];
 		memcpy(temp, stack, pointer * sizeof(stack));
 		capacity = capacity * capacityMultiplier;
+		delete[] stack;
 		return temp;
 	}
 
@@ -56,6 +57,10 @@ public:
 	}
 
 	Stack() : pointer(0), capacity(1), stack(nullptr) {}
+	
+	~Stack() {
+		delete[] stack;
+	}
 };
 
 #endif
