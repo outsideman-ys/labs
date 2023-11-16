@@ -7,7 +7,6 @@
 #include "D:\Labs C++\labs\Lab5\headers\ChildString.h" 
 #include "D:\Labs C++\labs\Lab5\headers\List.h" 
 
-
 int main()
 {
     //      CONSTRUCTOR WITH PARAMETERS     //

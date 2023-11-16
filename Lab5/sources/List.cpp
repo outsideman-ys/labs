@@ -1,6 +1,5 @@
 #include "D:\Labs C++\labs\Lab5\headers\List.h"
 
-
 bool List::isEmpty() {
     return head == nullptr;
 }
