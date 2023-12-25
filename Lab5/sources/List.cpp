@@ -9,7 +9,6 @@ void List::Push(Strings* object) {
         globalId = 0;
         Node* node = new Node(object, globalId);
         globalId++;
-        head = node;
         return;
     }
     Node* node = new Node(object, globalId);
