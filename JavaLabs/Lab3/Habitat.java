@@ -1,8 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.util.TreeSet;
-import java.util.Vector;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.TreeMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +15,7 @@ class Habitat extends JPanel {
     Iterator<Bee> iterator;
 
     private Set<Integer> idies;
-    private HashMap<Integer, Integer> idAndLiveTimeMap; 
+    private TreeMap<Integer, Integer> idAndLiveTimeMap; 
     private Bee[] bees;
 
     private Timer timer;
@@ -59,11 +59,11 @@ class Habitat extends JPanel {
     }
 
     public Habitat() {
-        liveBees = new Vector<>();
+        liveBees = new ArrayList<>();
         iterator = liveBees.iterator();
-        idies = new TreeSet<>();
+        idies = new HashSet<>();
         bees = new Bee[0];
-        idAndLiveTimeMap = new HashMap<>();
+        idAndLiveTimeMap = new TreeMap<>();
         random = ThreadLocalRandom.current();
         LoadImgs();
 
@@ -162,11 +162,11 @@ class Habitat extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (Bee bee : bees) {
+        for (Bee bee : liveBees) {
 
-            if (bee.getDieTime() <= simulationTime) {
-                continue;
-            }
+            //if (bee.getDieTime() <= simulationTime) {
+            //    continue;
+            //}
 
             int x = random.nextInt(70, getWidth()-70);
             int y = random.nextInt(70, getHeight()-70);
