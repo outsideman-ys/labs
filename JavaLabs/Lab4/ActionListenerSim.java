@@ -33,6 +33,11 @@ public class ActionListenerSim implements KeyListener {
     private ActionListener menuTimeListener;
     private ActionListener changeLifeTimeListener;
     private ActionListener showLiveBeesListener;
+    private ActionListener startMoveWorkerListener;
+    private ActionListener endMoveWorkerListener;
+    private ActionListener startMoveWarriorListener;
+    private ActionListener endMoveWarriorListener;
+    private ActionListener setPriorityListener;
 
     private void initActionListeners() {
 
@@ -180,6 +185,61 @@ public class ActionListenerSim implements KeyListener {
             }
         };
 
+        startMoveWarriorListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startMoveWarrior();
+            }
+            
+        };
+
+        endMoveWarriorListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stopMoveWarrior();
+            }
+            
+        };
+
+        startMoveWorkerListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startMoveWorker();
+            }
+            
+        };
+
+        endMoveWorkerListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stopMoveWorker();
+            }
+            
+        };
+
+        JPanel anotherPanel = new JPanel();
+        String[] choicesPriority = {"Min", "Normal", "Max"};
+        JComboBox<String> comboPriority = new JComboBox<>(choicesPriority);
+        anotherPanel.add(comboBoxBee);
+        anotherPanel.add(comboPriority);
+
+        setPriorityListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, anotherPanel, "Установка приоритета", JOptionPane.PLAIN_MESSAGE);
+
+                String beeKind = (String) comboBoxBee.getSelectedItem();
+                String priority = (String) comboPriority.getSelectedItem();
+
+                if (beeKind.equals("Warrior Bee")) {
+                    beeWorld.setPriorityWarrior(priority);
+                }
+                else {
+                    beeWorld.setPriorityWorker(priority);
+                }
+            }
+        };
+
     }
 
     public ActionListenerSim(Habitat beeWorld) {
@@ -202,6 +262,11 @@ public class ActionListenerSim implements KeyListener {
         Main.lifeTimeButton.addActionListener(changeLifeTimeListener);
         Main.lifeTimeItem.addActionListener(changeLifeTimeListener);
         Main.showLiveBees.addActionListener(showLiveBeesListener);
+        Main.startMoveWarrior.addActionListener(startMoveWarriorListener);
+        Main.endMoveWarrior.addActionListener(endMoveWarriorListener);
+        Main.startMoveWorker.addActionListener(startMoveWorkerListener);
+        Main.endMoveWorker.addActionListener(endMoveWorkerListener);
+        Main.setPriorityToThread.addActionListener(setPriorityListener);
 
         InputMap inputMap = Main.buttonPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_B, 0), "start");
@@ -292,6 +357,30 @@ public class ActionListenerSim implements KeyListener {
             Main.showInfoButton.setSelected(isInfoShowed);
             beeWorld.ShowInfo();
         }
+    }
+
+    private void startMoveWarrior() {
+        Main.startMoveWarrior.setEnabled(false);
+        Main.endMoveWarrior.setEnabled(true);
+        Habitat.isRunningWarrior = true;
+    }
+
+    private void stopMoveWarrior() {
+        Main.startMoveWarrior.setEnabled(true);
+        Main.endMoveWarrior.setEnabled(false);
+        Habitat.isRunningWarrior = false;
+    }
+
+    private void startMoveWorker() {
+        Main.startMoveWorker.setEnabled(false);
+        Main.endMoveWorker.setEnabled(true);
+        Habitat.isRunningWorker = true;
+    }
+
+    private void stopMoveWorker() {
+        Main.startMoveWorker.setEnabled(true);
+        Main.endMoveWorker.setEnabled(false);
+        Habitat.isRunningWorker = false;
     }
 
 }

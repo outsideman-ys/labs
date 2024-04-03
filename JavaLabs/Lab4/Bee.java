@@ -1,15 +1,48 @@
 
-public abstract class Bee {
+public abstract class Bee implements IBehaviour{
     protected String name;          // name that showed under the object
     protected int bornTime;
     protected int dieTime;
     protected Integer id;
+    protected int speed;
 
-    public Bee(String name, int bornTime, int lifeTime, int id) {
+    protected int x;
+    protected int y;
+
+    public Bee(String name, int bornTime, int lifeTime, int id, int x, int y, int speed) {
         this.name = name;
         this.bornTime = bornTime;
         this.dieTime = bornTime + lifeTime;
         this.id = id;
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+    }
+
+    protected void checkForCollision() {}
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public String getName() {

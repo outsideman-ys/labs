@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.HashSet;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.TreeMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,8 +24,8 @@ class Habitat extends JPanel {
     private int bornTimeCheck = 3;
     private int populationOfBees = 70;
     private double possibillity = 0.3;
-    private int lifeTimeWarrior = 10;
-    private int lifeTimeWorker = 10;
+    private int lifeTimeWarrior = 1000;
+    private int lifeTimeWorker = 1000;
     private int numberOfWorker = 0;
     private int numberOfWarrior = 0;
     private ThreadLocalRandom random;
@@ -34,6 +33,32 @@ class Habitat extends JPanel {
     private Image workerImage;
     private final String SRC_WARRIOR = "B:/labs/warriorBee.png";
     private final String SRC_WORKER = "B:/labs/workerBee.png";
+
+    public static Object monitor = new Object();
+    public static boolean isRunningWarrior = true;
+    public static boolean isRunningWorker = true;
+
+    private int x;
+    private int y;
+    private int speed = 10;
+
+    public void setPriorityWarrior(String priority) {
+        for (Bee bee: liveBees) {
+            if (bee instanceof Warrior) {
+                Warrior warrior = (Warrior) bee;
+                warrior.warriorAI.setThreadPriority(priority);
+            }
+        }
+    }
+
+    public void setPriorityWorker(String priority) {
+        for (Bee bee: liveBees) {
+            if (bee instanceof Worker) {
+                Worker warrior = (Worker) bee;
+                warrior.workerAI.setThreadPriority(priority);
+            }
+        }
+    }
 
     public void setPopulation(int population) {
         this.populationOfBees = population; 
@@ -65,14 +90,17 @@ class Habitat extends JPanel {
         random = ThreadLocalRandom.current();
         LoadImgs();
 
-        timer = new Timer(1000, new ActionListener() {
+        timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 simulationTime++;
-                if (simulationTime % bornTimeCheck == 0 && !liveBees.isEmpty()) {
-                    GenerateWorker();
-                }
-                GenerateWarrior();
                 
+                synchronized(monitor) {
+                    if (simulationTime % bornTimeCheck == 0 && !liveBees.isEmpty()) {
+                        GenerateWorker();
+                    }
+                    GenerateWarrior();
+                }
+
                 synchronized (liveBees) {
                     iterator = liveBees.iterator();
 
@@ -85,8 +113,10 @@ class Habitat extends JPanel {
                         }
                     }
                 }
-
-                repaint();
+                
+                synchronized(monitor) {
+                    repaint();
+                }
             }
         });
     }
@@ -121,7 +151,9 @@ class Habitat extends JPanel {
         if (((numberOfWorker * 100)/liveBees.size()) <= populationOfBees) {
             numberOfWorker++;
             Integer id = random.nextInt(0, Integer.MAX_VALUE);
-            Bee bee = new Worker(simulationTime, lifeTimeWorker, id);
+            x = random.nextInt(70, getWidth()-70);
+            y = random.nextInt(70, getHeight()-70);
+            Bee bee = new Worker(simulationTime, lifeTimeWorker, id, x, y, speed);
             liveBees.add(bee);
             idies.add(id);
             idAndLiveTimeMap.put(id, simulationTime);
@@ -133,7 +165,9 @@ class Habitat extends JPanel {
         if (number <= possibillity) {
             numberOfWarrior++;
             int id = random.nextInt(0, Integer.MAX_VALUE);
-            Bee bee = new Warrior(simulationTime, lifeTimeWarrior, id);
+            x = random.nextInt(70, getWidth()-70);
+            y = random.nextInt(70, getHeight()-70);
+            Bee bee = new Warrior(simulationTime, lifeTimeWarrior, id, x, y, speed);
             liveBees.add(bee);
             idies.add(id);
             idAndLiveTimeMap.put(id, simulationTime);
@@ -144,17 +178,13 @@ class Habitat extends JPanel {
         super.paintComponent(g);
 
         for (Bee bee : liveBees) {
-
-            int x = random.nextInt(70, getWidth()-70);
-            int y = random.nextInt(70, getHeight()-70);
-
             if(bee instanceof Warrior) {
-                g.drawImage(warriorImage, x, y, 50, 50, null);
-                g.drawString(bee.getName(), x, y + 60);
+                g.drawImage(warriorImage, bee.getX(), bee.getY(), 50, 50, null);
+                g.drawString(bee.getName(), bee.getX(), bee.getY() + 60);
             }
             else if (bee instanceof Worker) {
-                g.drawImage(workerImage, x, y, 50, 50, null);
-                g.drawString(bee.getName(), x, y + 60);
+                g.drawImage(workerImage, bee.getX(), bee.getY(), 50, 50, null);
+                g.drawString(bee.getName(), bee.getX(), bee.getY() + 60);
             }
         }
 
