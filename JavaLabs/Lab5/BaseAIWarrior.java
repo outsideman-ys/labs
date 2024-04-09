@@ -1,23 +1,22 @@
-public class BaseAIWorker extends BaseAI {
+public class BaseAIWarrior extends BaseAI {
 
-    private Worker workerBee;
+    private int counter = 0;
+    private Warrior warriorBee;
 
-    public BaseAIWorker(Worker workerBee) {
-        this.workerBee = workerBee;
+    public BaseAIWarrior(Warrior warriorBee) {
+        this.warriorBee = warriorBee;
 
         thread = new Thread(this);
         thread.start();
     }
 
-    
-
     @Override
     public void run() {
         while(true) {
             synchronized(Habitat.monitor) {
-                if (Habitat.isRunningWorker) {
+                if (Habitat.isRunningWarrior) {
                     Habitat.monitor.notify();
-                    workerBee.Fly();
+                    warriorBee.Fly();
                 }
                 else {
                     try {
@@ -26,14 +25,27 @@ public class BaseAIWorker extends BaseAI {
                         e.printStackTrace();
                     }
                 }
-            }
+                    
+            } 
             repaint();
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            counter++;
+            if (counter == 5) {
+                counter = 0;
+                warriorBee.changeDirection();
+            }
         }
     }
 
+    @Override
+    public String toString() {
+        return "BaseAIWarrior [counter=" + counter + ", warriorBee=" + warriorBee + "]";
+    }
+
+    
+    
 }

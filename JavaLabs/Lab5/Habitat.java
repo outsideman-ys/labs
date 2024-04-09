@@ -12,9 +12,9 @@ import javax.swing.*;
 
 class Habitat extends JPanel {
     private static List<Bee> liveBees;
-    Iterator<Bee> iterator;
-    private Set<Integer> idies;
-    private TreeMap<Integer, Integer> idAndLiveTimeMap; 
+    private static Iterator<Bee> iterator;
+    private static Set<Integer> idies;
+    private static TreeMap<Integer, Integer> idAndLiveTimeMap; 
 
     private Timer timer;
     private int simulationTime = 0;
@@ -37,25 +37,125 @@ class Habitat extends JPanel {
     public static Object monitor = new Object();
     public static boolean isRunningWarrior = true;
     public static boolean isRunningWorker = true;
+    private BaseAI base = new BaseAIWarrior(null);
+
+    private String priorityWarrior = "Normal";
+    private String priorityWorker = "Normal";
+
+    public int getNumberOfWorker() {
+        return numberOfWorker;
+    }
+
+    public void setNumberOfWorker(int numberOfWorker) {
+        this.numberOfWorker = numberOfWorker;
+    }
+
+    public int getNumberOfWarrior() {
+        return numberOfWarrior;
+    }
+
+    public void setNumberOfWarrior(int numberOfWarrior) {
+        this.numberOfWarrior = numberOfWarrior;
+    }
+
+    public String getPriorityWarrior() {
+        return priorityWarrior;
+    }
+
+    public String getPriorityWorker() {
+        return priorityWorker;
+    }
 
     private int x;
     private int y;
     private int speed = 10;
 
+    public boolean isShowTime() {
+        return showTime;
+    }
+
+    public void setShowTime(boolean showTime) {
+        this.showTime = showTime;
+    }
+
+    public boolean isEnded() {
+        return isEnded;
+    }
+
+    public void setEnded(boolean isEnded) {
+        this.isEnded = isEnded;
+    }
+
+    public boolean isShowInfo() {
+        return showInfo;
+    }
+
+    public void setShowInfo(boolean showInfo) {
+        this.showInfo = showInfo;
+    }
+
+    public int getBornTimeCheck() {
+        return bornTimeCheck;
+    }
+
+    public void setBornTimeCheck(int bornTimeCheck) {
+        this.bornTimeCheck = bornTimeCheck;
+    }
+
+    public int getPopulationOfBees() {
+        return populationOfBees;
+    }
+
+    public void setPopulationOfBees(int populationOfBees) {
+        this.populationOfBees = populationOfBees;
+    }
+
+    public double getPossibillity() {
+        return possibillity;
+    }
+
+    public void setPossibillity(double possibillity) {
+        this.possibillity = possibillity;
+    }
+
+    public int getLifeTimeWarrior() {
+        return lifeTimeWarrior;
+    }
+
+    public int getLifeTimeWorker() {
+        return lifeTimeWorker;
+    }
+
+    public static boolean isRunningWarrior() {
+        return isRunningWarrior;
+    }
+
+    public static void setRunningWarrior(boolean isRunningWarrior) {
+        Habitat.isRunningWarrior = isRunningWarrior;
+    }
+
+    public static boolean isRunningWorker() {
+        return isRunningWorker;
+    }
+
+    public static void setRunningWorker(boolean isRunningWorker) {
+        Habitat.isRunningWorker = isRunningWorker;
+    }
+
     public void setPriorityWarrior(String priority) {
+        priorityWarrior = priority;
         for (Bee bee: liveBees) {
             if (bee instanceof Warrior) {
-                Warrior warrior = (Warrior) bee;
-                warrior.warriorAI.setThreadPriority(priority);
+                base.setThreadPriority(priority);
             }
         }
     }
 
     public void setPriorityWorker(String priority) {
+        priorityWorker = priority;
         for (Bee bee: liveBees) {
             if (bee instanceof Worker) {
-                Worker warrior = (Worker) bee;
-                warrior.workerAI.setThreadPriority(priority);
+                base.setThreadPriority(priority);
             }
         }
     }
@@ -80,6 +180,18 @@ class Habitat extends JPanel {
 
     public TreeMap<Integer, Integer> getIdAndLiveMap() {
         return idAndLiveTimeMap;
+    }
+
+    public List<Bee> getLiveBees() {
+        return liveBees;
+    }
+
+    public void setLiveBees(List<Bee> liveBees) {
+        Habitat.liveBees = liveBees;
+    }
+
+    public int getSimulationTime() {
+        return simulationTime;
     }
 
     public Habitat() {

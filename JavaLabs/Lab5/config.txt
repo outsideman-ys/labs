@@ -1,0 +1,13 @@
+#\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u043A\u043E\u043D\u0444\u0438\u0433
+#Tue Apr 09 09:46:42 NOVT 2024
+isWorkerFlying=true
+workerFlyPriority=Min
+showInfoOption=false
+possibilityOfWarrior=0.3
+bornTimeWorker=3
+isWarriorFlying=true
+populationOfWorkers=70
+showTimeOption=true
+lifeTimeWarrior=321
+lifeTimeWorker=500
+warriorFlyPriority=Normal

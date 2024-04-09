@@ -6,14 +6,13 @@ class Warrior extends Bee {
     private int speedY;
     private ThreadLocalRandom random;
     private int randomNumber;
-    public BaseAIWarrior warriorAI;
     
     public Warrior(int bornTime, int lifeTime, int id, int x, int y, int speed) {
         super("Warrior Bee", bornTime, lifeTime, id, x, y, speed);
         this.speedX = speed;
         this.speedY = speed;
         random = ThreadLocalRandom.current();
-        warriorAI = new BaseAIWarrior(this);
+        new BaseAIWarrior(this);
     }
 
     @Override
@@ -44,4 +43,17 @@ class Warrior extends Bee {
         x += speedX;
         y += speedY;
     }
+
+    public void startFly() {
+        new BaseAIWarrior(this);
+    }
+
+    
+
+    @Override
+    public String toString() {
+        return "Warrior [speedX=" + speedX + ", speedY=" + speedY + ", bornTime=" + bornTime + "]";
+    }
+
+    
 }

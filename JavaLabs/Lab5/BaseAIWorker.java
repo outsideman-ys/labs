@@ -1,3 +1,4 @@
+
 public class BaseAIWorker extends BaseAI {
 
     private Worker workerBee;
@@ -8,8 +9,6 @@ public class BaseAIWorker extends BaseAI {
         thread = new Thread(this);
         thread.start();
     }
-
-    
 
     @Override
     public void run() {
@@ -35,5 +34,13 @@ public class BaseAIWorker extends BaseAI {
             }
         }
     }
+
+
+
+    @Override
+    public String toString() {
+        return "BaseAIWorker [workerBee=" + workerBee + "]";
+    }
+
 
 }
