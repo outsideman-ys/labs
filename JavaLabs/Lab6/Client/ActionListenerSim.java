@@ -30,8 +30,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class ActionListenerSim implements KeyListener {
 
     /*
-     * добавлено событие при закрытии окна (запись в конфиг) windowCloseListener
-     * события для сохранения/загрузки живых пчел saveLiveBeesListener loadLiveBeesListener
+     * добавлено событие showClientsListener
      */
 
     private Habitat beeWorld;
@@ -79,6 +78,8 @@ public class ActionListenerSim implements KeyListener {
     private ActionListener saveLiveBeesListener;
     private ActionListener loadLiveBeesListener;
     private ActionListener consoleListener;
+    private ActionListener showClientsListener;
+    private ActionListener sendBeesOtherClientListener;
 
     private final String command1 = "show(1)";
     private final String command2 = "show(2)";
@@ -310,10 +311,11 @@ public class ActionListenerSim implements KeyListener {
                     catch (IOException ex) {
                         ex.printStackTrace();
                     }
+                    Main.client.sendCloseMessage();
                 }
                 catch (IOException ex) {
                     ex.printStackTrace();
-                }
+                } 
                     
             }
         };
@@ -448,6 +450,39 @@ public class ActionListenerSim implements KeyListener {
             }
         };
 
+        showClientsListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String messageZeroLine = "Connected BeeWorlds";
+                String clients = "\n\t";
+                for (ClientInfo client : Main.client.getInfos()) {
+                    clients += "Client : " + String.valueOf(client.getNumber()) + " IP: " + client.getIP() + " port: "
+                            + String.valueOf(client.getPort())  + "\n";
+                }
+
+                JOptionPane.showOptionDialog(Main.frame, messageZeroLine + clients, "INFO MESSAGE", JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE, null, new String[]{"OK"}, "OK");
+            }
+        };
+
+        sendBeesOtherClientListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel clientsPanel = new JPanel();
+                String[] clientIdies = new String[Main.client.getClientsIdies().size()];
+                int i = 0;
+                for (int number : Main.client.getClientsIdies()) {
+                    clientIdies[i++] = String.valueOf(number);
+                }
+                JComboBox<String> comboClientIdies = new JComboBox<>(clientIdies);
+                clientsPanel.add(comboClientIdies);
+                JOptionPane.showMessageDialog(null, clientsPanel, "Отправить пчел", JOptionPane.PLAIN_MESSAGE);
+                String id = (String)comboClientIdies.getSelectedItem();
+                ArrayList<Bee> randomBees = beeWorld.getRandomBees();
+                Main.client.sendBees(id,randomBees);
+            }
+        };
+
     }
 
     public ActionListenerSim(Habitat beeWorld) {
@@ -479,6 +514,8 @@ public class ActionListenerSim implements KeyListener {
         Main.saveSimItem.addActionListener(saveLiveBeesListener);
         Main.loadSimTime.addActionListener(loadLiveBeesListener);
         Main.consoleItem.addActionListener(consoleListener);
+        Main.showClients.addActionListener(showClientsListener);
+        Main.sendBeesOtherClient.addActionListener(sendBeesOtherClientListener);
 
         InputMap inputMap = Main.buttonPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_B, 0), "start");
@@ -596,4 +633,3 @@ public class ActionListenerSim implements KeyListener {
     }
 
 }
-//textArea.setCaretPosition(textArea.getDocument().getLength());
