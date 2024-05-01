@@ -1,5 +1,5 @@
 #\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u043A\u043E\u043D\u0444\u0438\u0433
-#Wed May 01 19:19:17 NOVT 2024
+#Fri Apr 19 09:05:45 NOVT 2024
 isWorkerFlying=true
 workerFlyPriority=Min
 showInfoOption=false
